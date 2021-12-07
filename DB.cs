@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-namespace KIT206_assignment_2_
+namespace KIT206_assignment_2_.model
 {
     class DB
     {
@@ -30,7 +30,7 @@ namespace KIT206_assignment_2_
         {
             Console.WriteLine("testing has begun");
 
-            Program demo = new Program();
+            DB demo = new DB();
 
             int count = demo.GetNumberOfRecords();
             Console.WriteLine("Number of researcher records: {0}", count);
