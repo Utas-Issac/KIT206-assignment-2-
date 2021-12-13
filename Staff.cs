@@ -9,14 +9,21 @@ namespace KIT206_assignment_2_.model
 
     class Staff : Researcher
     {
+        public float ThreeYearAverage()
+        {
+            return 0.0f;
+        }
 
-
+        public float Performance()
+        {
+            return 0.0f;
+        }
         /*
          * Task 2.2.3
          */
         public override string ToString()
         {
-            return familyName + "\t" + id + "\t" + gender;
+            return family_name + "\t" + id + "\t" + gender;
         }
 
     }

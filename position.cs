@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace KIT206_assignment_2_
 {
-    class position
+    public class Position
     {
 
-        public class Position
-        {
             public int id;
             public DateTime start;
             public DateTime end;
-        }
     }
 }

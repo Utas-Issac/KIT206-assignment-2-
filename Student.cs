@@ -9,8 +9,9 @@ namespace KIT206_assignment_2_.model
 
     class Student : Researcher
     {
+        public string degree { get; set; }
 
-
+        public int supervisor_id;
 
 
         /*
@@ -18,7 +19,7 @@ namespace KIT206_assignment_2_.model
          */
         public override string ToString()
         {
-            return familyName + "\t" + id + "\t" + gender;
+            return family_name + "\t" + id + "\t" + gender;
         }
 
     }

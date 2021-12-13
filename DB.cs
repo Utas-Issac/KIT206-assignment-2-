@@ -41,6 +41,8 @@ namespace KIT206_assignment_2_.model
             Console.WriteLine("Names read into a DataSet (should be the same as above):");
             demo.ReadIntoDataSet();
 
+
+
             Console.ReadLine();
         }
 
@@ -143,6 +145,24 @@ namespace KIT206_assignment_2_.model
                 }
             }
             return count;
+        }
+
+        static List<Researcher> FilteredSessions(String researcher_type, List<Researcher> researchers)
+        {
+            var filtered = from Researcher r in researchers
+                           where r.type.ToString() == researcher_type
+                           select r;
+
+            return new List<Researcher>(filtered);
+        }
+
+        static List<Researcher> FilteredSessions(int fYear, int tYear, List<Researcher> researchers)
+        {
+            var filtered = from Researcher r in researchers
+                           where r.utas_start.Year <= fYear && r.current_start.Year > tYear
+                           select r;
+
+            return new List<Researcher>(filtered);
         }
     }
 }
