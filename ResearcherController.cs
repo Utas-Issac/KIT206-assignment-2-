@@ -7,8 +7,10 @@ using KIT206_assignment_2_.model;
 
 namespace KIT206_assignment_2_.controller
 {
+    
     public class ResearcherController
     {
+        public List<Researcher> researchers;
         /*
         public List<Researcher> GetResearchers ()
         {
@@ -16,7 +18,20 @@ namespace KIT206_assignment_2_.controller
         }
         */
 
+        public List<Researcher> FilterBy(Level level)
+        {
+            return new List<Researcher> { };
+        }
 
+        public List<Researcher> FilterByName(string name)
+        {
+            return new List<Researcher> { };
+        }
+
+        public Researcher LoadResearcherDetails()
+        {
+            return new Researcher();
+        }
     }
     
 }

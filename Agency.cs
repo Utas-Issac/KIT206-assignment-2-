@@ -151,6 +151,7 @@ namespace KIT206_assignment_2_
 
                 while (rdr.Read())
                 {
+                    /*
                     work.Add(new Researcher
                     {
                         title = rdr.GetString(0),
@@ -158,6 +159,7 @@ namespace KIT206_assignment_2_
                         Mode = ParseEnum<Mode>(rdr.GetString(2)),
                         Certified = rdr.GetDateTime(3)
                     });
+                    */
                 }
             }
             catch (MySqlException e)

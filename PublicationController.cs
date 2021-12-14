@@ -9,14 +9,12 @@ namespace KIT206_assignment_2_.controller
 {
     class PublicationController
     {
-        /*
-        public List<Researcher> getResearchers(string i)
+        
+        public List<Publication> LoadPublications(Researcher researcher)
         {
-            List<Researcher> r;
-            return;
+            return new List<Publication> { };
 
         }
-        */
 
     }
 

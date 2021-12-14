@@ -31,6 +31,7 @@ namespace KIT206_assignment_2_.model
         public Gender gender { get; set; }
         public Campus campus { get; set; }
         public Type type { get; set; }
+        public Level level { get; set; }
 
         public List<Position> positions;
 
