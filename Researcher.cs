@@ -21,15 +21,18 @@ namespace KIT206_assignment_2_.model
         public string degree { get; set; }
         public string photo { get; set; }
         public string email { get; set; }
+        public int year { get; set; }
 
 
         public DateTime utas_start { get; set; }
         public DateTime current_start { get; set; }
 
-        public Publication publications { get; set; }
+        public List<Publication> publications { get; set; }
         public Gender gender { get; set; }
         public Campus campus { get; set; }
         public Type type { get; set; }
+
+        public List<Position> positions;
 
         /*
          * Task 2.2.3

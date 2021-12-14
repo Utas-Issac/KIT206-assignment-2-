@@ -81,9 +81,59 @@ namespace KIT206_assignment_2_
             return staff;
         }
 
-        public static List<TrainingSession> LoadTrainingSessions(int id)
+        public static List<Publication> LoadAllPublication()
         {
-            List<TrainingSession> work = new List<TrainingSession>();
+            List<Publication> publications = new List<Publication>();
+
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("select * from publication", conn);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    //Note that in your assignment you will need to inspect the *type* of the
+                    //Researcher/researcher before deciding which kind of concrete class to create.
+
+                    // GetInt32(0), GetString(1)
+                    publications.Add(new Publication
+                    {
+                        doi = rdr.GetString(0),
+                        title = rdr.GetString(1),
+                        authors = rdr.GetString(2),
+                        year = rdr.GetInt32(3),
+                        //pubType = rdr.GetString(4) Mode = ParseEnum<Mode>(rdr.GetString(2)),
+                        pubType = ParseEnum<Publication_Type>(rdr.GetString(4))
+                    });
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error connecting to database: " + e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return publications;
+        }
+
+        public static List<Researcher> LoadTrainingSessions(int id)
+        {
+            List<Researcher> work = new List<Researcher>();
 
             MySqlConnection conn = GetConnection();
             MySqlDataReader rdr = null;
@@ -101,10 +151,10 @@ namespace KIT206_assignment_2_
 
                 while (rdr.Read())
                 {
-                    work.Add(new TrainingSession
+                    work.Add(new Researcher
                     {
-                        Title = rdr.GetString(0),
-                        Year = rdr.GetInt32(1),
+                        title = rdr.GetString(0),
+                        year = rdr.GetInt32(1),
                         Mode = ParseEnum<Mode>(rdr.GetString(2)),
                         Certified = rdr.GetDateTime(3)
                     });
@@ -141,7 +191,7 @@ namespace KIT206_assignment_2_
 
                 MySqlCommand cmd = new MySqlCommand("select count(*) from publication as pub, researcher_publication as respub " +
                                                     "where pub.doi = respub.doi and researcher_id = ?id and year >= ?start and year <= ?end", conn);
-                cmd.Parameters.AddWithValue("id", e.ID);
+                cmd.Parameters.AddWithValue("id", e.id);
                 cmd.Parameters.AddWithValue("start", startYear);
                 cmd.Parameters.AddWithValue("end", endYear);
                 count = Int32.Parse(cmd.ExecuteScalar().ToString());
@@ -165,11 +215,11 @@ namespace KIT206_assignment_2_
         public static List<Researcher> Generate()
         {
             return new List<Researcher>() {
-                new Researcher { Name = "Jane", ID = 1, Gender = Gender.F },
-                new Researcher { Name = "John", ID = 3, Gender = Gender.M },
-                new Researcher { Name = "Mary", ID = 7, Gender = Gender.F },
-                new Researcher { Name = "Lindsay", ID = 5, Gender = Gender.X },
-                new Researcher { Name = "Meilin", ID = 2, Gender = Gender.F }
+                new Researcher { family_name = "Jane", id = 1, gender = Gender.F },
+                new Researcher { family_name = "John", id = 3, gender = Gender.M },
+                new Researcher { family_name = "Mary", id = 7, gender = Gender.F },
+                new Researcher { family_name = "Lindsay", id = 5, gender = Gender.X },
+                new Researcher { family_name = "Meilin", id = 2, gender = Gender.F }
             };
         }
     }

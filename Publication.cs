@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace KIT206_assignment_2_.model
 {
-
+    public enum Publication_Type { Conference, Journal, Other };
     public class Publication
     {
         public string doi { get; set; }
         public string title { get; set; }
-        public string author { get; set; }
+        public string authors { get; set; }
 
-        public string citation { get; set; }
+        public string cite_as { get; set; }
         public DateTime availabilityDate { get; set; }
-        public DateTime publicationYear { get; set; }
-        public string pubType { get; set; }
+        public int year { get; set; }
+        public Publication_Type pubType { get; set; }
+        public DateTime available { get; set; }
+
 
 
         /*
