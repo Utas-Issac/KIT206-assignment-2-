@@ -26,7 +26,7 @@ namespace KIT206_assignment_2_.model
          */
         public override string ToString()
         {
-            return doi + "\t" + title + "\t" + author;
+            return doi + "\t" + title + "\t" + authors;
         }
 
     }

@@ -41,7 +41,7 @@ namespace KIT206_assignment_2_
 
         public static List<Researcher> LoadAll()
         {
-            List<Researcher> staff = new List<Researcher>();
+            List<Researcher> researchers = new List<Researcher>();
 
             MySqlConnection conn = GetConnection();
             MySqlDataReader rdr = null;
@@ -50,16 +50,21 @@ namespace KIT206_assignment_2_
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name from researcher", conn);
+                MySqlCommand cmd = new MySqlCommand("select id, given_name, family_name, type, level from researcher", conn);
                 rdr = cmd.ExecuteReader();
+                Console.WriteLine("Hello");
 
                 while (rdr.Read())
                 {
                     //Note that in your assignment you will need to inspect the *type* of the
                     //Researcher/researcher before deciding which kind of concrete class to create.
-
-
-                    //staff.Add(new Researcher { ID = rdr.GetInt32(0), Name = rdr.GetString(1) + " " + rdr.GetString(2) });
+                    researchers.Add(new Researcher { 
+                        id = rdr.GetInt32(0), 
+                        given_name = rdr.GetString(1), 
+                        family_name = rdr.GetString(2),
+                        type = ParseEnum<Researcher_Type>(rdr.GetString(3)),
+                        //level = ParseEnum<Level>(rdr.GetString(4))
+                    });
                 }
             }
             catch (MySqlException e)
@@ -78,7 +83,7 @@ namespace KIT206_assignment_2_
                 }
             }
 
-            return staff;
+            return researchers;
         }
 
         public static List<Publication> LoadAllPublication()
@@ -131,7 +136,71 @@ namespace KIT206_assignment_2_
             return publications;
         }
 
-        public static List<Researcher> LoadTrainingSessions(int id)
+        public static Researcher GetDetailResearcher(int id)
+        {
+            Researcher researcher = new Researcher();
+
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand("select title, year, type, available " +
+                                                    "from publication as pub, researcher_publication as respub " +
+                                                    "where pub.doi=respub.doi and researcher_id=?id", conn);
+
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    researcher.id = id;
+                    researcher.family_name = rdr.GetString(1);
+                    researcher.given_name = rdr.GetString(1);
+                    researcher.title = rdr.GetString(1);
+                    researcher.unit = rdr.GetString(1);
+                    researcher.campus = ParseEnum<Campus>(rdr.GetString(1));
+                    researcher.email = rdr.GetString(1);
+                    researcher.photo = rdr.GetString(1);
+                    //researcher.degree = rdr.GetString(1);
+                    //researcher.supervisor_id = rdr.GetString(1);
+                    researcher.level = ParseEnum<Level>(rdr.GetString(1));
+                    //researcher.utas_start = rdr.GetTimeSpan(1);
+                    //researcher.current_start = rdr.GetString(1);
+
+                    /*
+                    work.Add(new Researcher
+                    {
+                        title = rdr.GetString(0),
+                        year = rdr.GetInt32(1),
+                        Mode = ParseEnum<Mode>(rdr.GetString(2)),
+                        Certified = rdr.GetDateTime(3)
+                    });
+                    */
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error connecting to database: " + e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return researcher;
+        }
+
+        public static List<Researcher> GetDetailResearcher_Example(int id)
         {
             List<Researcher> work = new List<Researcher>();
 

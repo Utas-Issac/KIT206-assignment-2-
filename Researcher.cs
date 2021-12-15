@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KIT206_assignment_2_.model
 {
-    public enum Type { Staff, Student };
+    public enum Researcher_Type { Staff, Student };
     public enum Gender { M, F, X };
     public enum Campus { Hobart, Launceston, Cradle_Coast };
     public enum Level { A, B, C, D, E };
@@ -18,7 +18,7 @@ namespace KIT206_assignment_2_.model
         public string given_name { get; set; }
         public string title { get; set; }
         public string unit { get; set; }
-        public string degree { get; set; }
+        //public string degree { get; set; }
         public string photo { get; set; }
         public string email { get; set; }
         public int year { get; set; }
@@ -30,7 +30,7 @@ namespace KIT206_assignment_2_.model
         public List<Publication> publications { get; set; }
         public Gender gender { get; set; }
         public Campus campus { get; set; }
-        public Type type { get; set; }
+        public Researcher_Type type { get; set; }
         public Level level { get; set; }
 
         public List<Position> positions;
@@ -40,7 +40,7 @@ namespace KIT206_assignment_2_.model
          */
         public override string ToString()
         {
-            return family_name + "\t" + id + "\t" + gender;
+            return id + "\t" + family_name + " " + given_name + $"({title})";
         }
 
         public Position GetEarliestJob()
@@ -79,5 +79,6 @@ namespace KIT206_assignment_2_.model
         {
             return -1;
         }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using MySql.Data.MySqlClient;
+using KIT206_assignment_2_;
 
 namespace KIT206_assignment_2_.model
 {
@@ -14,6 +15,7 @@ namespace KIT206_assignment_2_.model
         private const string user = "kit206";
         private const string pass = "kit206";
         private const string server = "alacritas.cis.utas.edu.au";
+        
 
         private MySqlConnection conn;
 
@@ -41,8 +43,30 @@ namespace KIT206_assignment_2_.model
             Console.WriteLine("Names read into a DataSet (should be the same as above):");
             demo.ReadIntoDataSet();
 
+            Console.WriteLine();
+           
+            List<Researcher> list_researchers = Agency.LoadAll();
+            Console.WriteLine($"Name: {list_researchers[0].family_name}");
+            Console.WriteLine($"Name: {list_researchers[0].type}");
+            //Console.WriteLine($"Name: {list_researchers[0].level}");
+            List<Researcher> f_list_researchers = FilteredSessions("student", list_researchers);
+            foreach (var r in f_list_researchers)
+            {
+                Console.WriteLine($"Name: {r.family_name}");
+            }
 
+            if (true)
+            {
+                Student s = new Student();
+                s.degree = "IT";
+            }
+            else
+            {
+                Researcher s = new Staff();
+            }
+            
 
+            Console.WriteLine();
             Console.ReadLine();
         }
 
@@ -59,7 +83,7 @@ namespace KIT206_assignment_2_.model
                 conn.Open();
 
                 // 1. Instantiate a new command with a query and connection
-                MySqlCommand cmd = new MySqlCommand("select given_name, family_name from researcher", conn);
+                MySqlCommand cmd = new MySqlCommand("select given_name, family_name, title from researcher", conn);
 
                 // 2. Call Execute reader to get query results
                 rdr = cmd.ExecuteReader();
@@ -68,7 +92,7 @@ namespace KIT206_assignment_2_.model
                 while (rdr.Read())
                 {
                     //This illustrates how the raw data can be obtained using an indexer [] or a particular data type can be obtained using a GetTYPENAME() method.
-                    Console.WriteLine("{0} {1}", rdr[0], rdr.GetString(1));
+                    Console.WriteLine("{0} {1} ({2})", rdr[0], rdr.GetString(1), rdr.GetString(2));
                 }
             }
             finally
@@ -105,6 +129,15 @@ namespace KIT206_assignment_2_.model
                     //type was obtained from a given column, but can call ToString() on an entry if needed.
                     Console.WriteLine("Name: {0} {1}", row["given_name"], row["family_name"].ToString());
                 }
+
+                //foreach (DataRow row in researcherDataSet.Tables["researcher"].Rows)
+                //{
+                //    for (int i = 0; i < researcherDataSet.Tables["researcher"].Columns.Count; i++)
+                //    {
+                //        Console.WriteLine(researcherDataSet.Tables["researcher"].Columns[i].ColumnName, row[researcherDataSet.Tables["researcher"].Columns[i].ColumnName].ToString());
+                //    }
+                //}
+
             }
             finally
             {
@@ -149,18 +182,18 @@ namespace KIT206_assignment_2_.model
 
         static List<Researcher> FilteredSessions(String researcher_type, List<Researcher> researchers)
         {
-            var filtered = from Researcher r in researchers
-                           where r.type.ToString() == researcher_type
-                           select r;
+            var filtered = from Researcher researcher in researchers
+                           where researcher.type.ToString() == researcher_type
+                           select researcher;
 
             return new List<Researcher>(filtered);
         }
 
         static List<Researcher> FilteredSessions(int fYear, int tYear, List<Researcher> researchers)
         {
-            var filtered = from Researcher r in researchers
-                           where r.utas_start.Year <= fYear && r.current_start.Year > tYear
-                           select r;
+            var filtered = from Researcher researcher in researchers
+                           where researcher.utas_start.Year <= fYear && researcher.current_start.Year > tYear
+                           select researcher;
 
             return new List<Researcher>(filtered);
         }

@@ -11,12 +11,8 @@ namespace KIT206_assignment_2_.controller
     public class ResearcherController
     {
         public List<Researcher> researchers;
-        /*
-        public List<Researcher> GetResearchers ()
-        {
-            return new List<Researcher> 
-        }
-        */
+
+        public List<Researcher> filtered_researchers;
 
         public List<Researcher> FilterBy(Level level)
         {
