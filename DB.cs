@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using MySql.Data.MySqlClient;
-using KIT206_assignment_2_;
 
-namespace KIT206_assignment_2_.model
+namespace RAP
 {
     class DB
     {
@@ -15,7 +14,7 @@ namespace KIT206_assignment_2_.model
         private const string user = "kit206";
         private const string pass = "kit206";
         private const string server = "alacritas.cis.utas.edu.au";
-        
+
 
         private MySqlConnection conn;
 
@@ -25,7 +24,7 @@ namespace KIT206_assignment_2_.model
              * Create the connection object (does not actually make the connection yet)
              * Note that the RAP case study database has the same values for its name, user name and password (to keep things simple)
              */
-            string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3}", db, server, user, pass);
+            string connectionString = string.Format("Database={0};Data Source={1};User Id={2};Password={3}", db, server, user, pass);
             conn = new MySqlConnection(connectionString);
         }
         static void Main(string[] args)
@@ -44,7 +43,7 @@ namespace KIT206_assignment_2_.model
             demo.ReadIntoDataSet();
 
             Console.WriteLine();
-           
+
             List<Researcher> list_researchers = Agency.LoadAll();
             Console.WriteLine($"Name: {list_researchers[0].family_name}");
             Console.WriteLine($"Name: {list_researchers[0].type}");
@@ -64,7 +63,7 @@ namespace KIT206_assignment_2_.model
             {
                 Researcher s = new Staff();
             }
-            
+
 
             Console.WriteLine();
             Console.ReadLine();
@@ -111,7 +110,7 @@ namespace KIT206_assignment_2_.model
             }
         }
 
-       
+
         /*
          * Using the ExecuteReader method to select from a single table
          */
@@ -182,7 +181,7 @@ namespace KIT206_assignment_2_.model
             return count;
         }
 
-        static List<Researcher> FilteredSessions(String researcher_type, List<Researcher> researchers)
+        static List<Researcher> FilteredSessions(string researcher_type, List<Researcher> researchers)
         {
             var filtered = from Researcher researcher in researchers
                            where researcher.type.ToString() == researcher_type

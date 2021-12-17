@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206_assignment_2_.model
+namespace RAP
 {
     public enum Publication_Type { Conference, Journal, Other };
     public class Publication

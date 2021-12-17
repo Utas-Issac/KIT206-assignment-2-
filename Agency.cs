@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using KIT206_assignment_2_.model;
 
-namespace KIT206_assignment_2_
+namespace RAP
 {
     abstract class Agency
     {
@@ -32,7 +31,7 @@ namespace KIT206_assignment_2_
             if (conn == null)
             {
                 //Note: This approach is not thread-safe
-                string connectionString = String.Format("Database={0};Data Source={1};User Id={2};Password={3}", db, server, user, pass);
+                string connectionString = string.Format("Database={0};Data Source={1};User Id={2};Password={3}", db, server, user, pass);
                 conn = new MySqlConnection(connectionString);
             }
             return conn;
@@ -58,9 +57,10 @@ namespace KIT206_assignment_2_
                 {
                     //Note that in your assignment you will need to inspect the *type* of the
                     //Researcher/researcher before deciding which kind of concrete class to create.
-                    researchers.Add(new Researcher { 
-                        id = rdr.GetInt32(0), 
-                        given_name = rdr.GetString(1), 
+                    researchers.Add(new Researcher
+                    {
+                        id = rdr.GetInt32(0),
+                        given_name = rdr.GetString(1),
                         family_name = rdr.GetString(2),
                         type = ParseEnum<Researcher_Type>(rdr.GetString(3)),
                         //level = ParseEnum<Level>(rdr.GetString(4))
@@ -265,7 +265,7 @@ namespace KIT206_assignment_2_
                 cmd.Parameters.AddWithValue("id", e.id);
                 cmd.Parameters.AddWithValue("start", startYear);
                 cmd.Parameters.AddWithValue("end", endYear);
-                count = Int32.Parse(cmd.ExecuteScalar().ToString());
+                count = int.Parse(cmd.ExecuteScalar().ToString());
             }
             catch (MySqlException ex)
             {

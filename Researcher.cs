@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206_assignment_2_.model
+namespace RAP
 {
     public enum Researcher_Type { Staff, Student };
     public enum Gender { Any, M, F, X };
@@ -57,7 +57,7 @@ namespace KIT206_assignment_2_.model
         {
             return null;
         }
-        
+
         public DateTime CurrentJobStart()
         {
             DateTime data = new DateTime();

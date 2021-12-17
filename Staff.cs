@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIT206_assignment_2_.model
+namespace RAP
 {
 
     class Staff : Researcher
@@ -12,7 +12,7 @@ namespace KIT206_assignment_2_.model
         public float ThreeYearAverage(List<Publication> publications, int year)
         {
 
-            
+
             return 0.0f;
         }
 
