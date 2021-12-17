@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace KIT206_assignment_2_.model
 {
     public enum Researcher_Type { Staff, Student };
-    public enum Gender { M, F, X };
+    public enum Gender { Any, M, F, X };
     public enum Campus { Hobart, Launceston, Cradle_Coast };
-    public enum Level { A, B, C, D, E };
+    public enum Level { Any, A, B, C, D, E };
 
     public class Researcher
     {

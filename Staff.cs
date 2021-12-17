@@ -9,8 +9,10 @@ namespace KIT206_assignment_2_.model
 
     class Staff : Researcher
     {
-        public float ThreeYearAverage()
+        public float ThreeYearAverage(List<Publication> publications, int year)
         {
+
+            
             return 0.0f;
         }
 

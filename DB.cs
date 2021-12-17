@@ -130,6 +130,8 @@ namespace KIT206_assignment_2_.model
                     Console.WriteLine("Name: {0} {1}", row["given_name"], row["family_name"].ToString());
                 }
 
+
+
                 //foreach (DataRow row in researcherDataSet.Tables["researcher"].Rows)
                 //{
                 //    for (int i = 0; i < researcherDataSet.Tables["researcher"].Columns.Count; i++)
