@@ -61,7 +61,7 @@ namespace RAP
             }
             else
             {
-                Researcher s = new Staff();
+                Staff s = new Staff();
             }
 
 

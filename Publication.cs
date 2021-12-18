@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RAP
 {
-    public enum Publication_Type { Conference, Journal, Other };
+    public enum Publication_Type { Any, Conference, Journal, Other };
     public class Publication
     {
         public string doi { get; set; }

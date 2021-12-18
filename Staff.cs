@@ -11,9 +11,11 @@ namespace RAP
     {
         public float ThreeYearAverage(List<Publication> publications, int year)
         {
+            var average_number = from Publication pub in publications
+                             where pub.year >= year - 3
+                             select pub;
 
-
-            return 0.0f;
+            return average_number.Count() / 3;
         }
 
         public float Performance()
